@@ -1,0 +1,817 @@
+name: data_agent_semantic_model
+description: Unified model for analyzing customer meetings, outcomes and interactions for Analyst reasoning.
+tables:
+  - name: CUSTOMER_INDUSTRY
+    base_table:
+      database: AICOLLEGE
+      schema: PUBLIC
+      table: CUSTOMER_INDUSTRY
+    dimensions:
+      - name: CUSTOMER_NAME
+        expr: CUSTOMER_NAME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Acme Corp
+          - BetaTech
+          - Gamma LLC
+        description: The name of the customer organization.
+        synonyms:
+          - company_name
+          - client_name
+          - customer_title
+          - account_name
+          - client_title
+          - organization_name
+          - account_holder
+          - company_title
+      - name: INDUSTRY
+        expr: INDUSTRY
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Professional Services
+          - IT Services
+          - Sports Technology
+        description: Classify customers by industry (e.g., healthcare, retail, etc.), helping to analyze feature adoption trends across industries.
+        synonyms:
+          - sector
+          - field
+          - market
+          - category
+          - business_type
+          - trade
+          - commerce
+          - economic_sector
+          - industrial_sector
+          - industry
+          - industry_classification
+          - customer_sector
+          - market_vertical
+      - name: CUSTOMER_SIZE
+        expr: CUSTOMER_SIZE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Large
+          - Medium
+          - Small
+        description: The size of the customer's organization, categorized as Large, Medium, or Small, indicating the scale of their operations and potential business volume.
+        synonyms:
+          - company_size
+          - organization_size
+          - business_size
+          - customer_scale
+          - firm_size
+          - enterprise_scale
+      - name: REGION
+        expr: REGION
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - North America
+          - Europe
+          - Asia
+        description: The geographic region in which the customer is located.
+        synonyms:
+          - area
+          - territory
+          - zone
+          - district
+          - sector
+          - province
+          - state
+          - county
+          - geographic_location
+          - locale
+    primary_key:
+      columns:
+        - CUSTOMER_NAME
+    description: This table stores information about customers across various industries, including their company name, industry classification, company size, and geographic region, with the customer name serving as a unique identifier.
+    synonyms:
+      - customer_industry
+      - customer_sector
+      - industry_customers
+      - customer_market
+      - business_sector
+      - client_industry
+      - industry_clients
+  - name: CUSTOMER_INTERACTIONS
+    base_table:
+      database: AICOLLEGE
+      schema: PUBLIC
+      table: CUSTOMER_INTERACTIONS
+    dimensions:
+      - name: INTERACTION_ID
+        expr: INTERACTION_ID
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - I1
+          - I2
+          - I3
+        description: Unique identifier for each customer interaction.
+        synonyms:
+          - interaction_key
+          - engagement_id
+          - customer_touchpoint_id
+          - event_id
+          - transaction_id
+          - activity_id
+          - conversation_id
+      - name: CUSTOMER_NAME
+        expr: CUSTOMER_NAME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Acme Corp
+          - BetaTech
+          - Gamma LLC
+        description: Track other interactions with customers, such as support tickets or email communications.
+        synonyms:
+          - client_name
+          - customer_full_name
+          - account_holder
+          - account_name
+          - client_full_name
+          - customer_title
+          - account_owner
+          - support_logs
+          - interaction_records
+          - customer_touches
+          - communications
+      - name: INTERACTION_TYPE
+        expr: INTERACTION_TYPE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Support Ticket
+          - Email
+          - Phone Call
+        description: The type of interaction a customer had with the company, such as opening a support ticket, sending an email, or making a phone call.
+        synonyms:
+          - interaction_category
+          - communication_method
+          - engagement_type
+          - customer_touchpoint
+          - interaction_channel
+          - contact_type
+      - name: FEATURE_DISCUSSED
+        expr: FEATURE_DISCUSSED
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Warehouse Autoscaling
+          - Snowpark
+          - Document AI
+        description: The feature or product discussed during the customer interaction.
+        synonyms:
+          - topic_discussed
+          - discussed_topic
+          - interaction_subject
+          - feature_reviewed
+          - discussed_feature
+          - subject_of_discussion
+          - interaction_topic
+      - name: RESOLUTION_STATUS
+        expr: RESOLUTION_STATUS
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Resolved
+          - Pending
+        description: The current status of the customer interaction, indicating whether the issue has been resolved or is still pending.
+        synonyms:
+          - resolution_outcome
+          - issue_status
+          - problem_resolution
+          - case_status
+          - outcome
+          - disposition
+          - resolution_result
+          - case_outcome
+          - status_resolution
+      - name: INTERACTION_DETAIL
+        expr: INTERACTION_DETAIL
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Provided guidance on multi‑cluster scaling during audit busy season
+          - Requested code samples for Snowpark ingestion and model deployment
+          - Clarified how Document AI extracts tables from partner PDF revenue files
+        description: Details of the specific interaction or request made by the customer, such as questions asked, issues discussed, or guidance provided by the support team.
+        synonyms:
+          - interaction_description
+          - interaction_notes
+          - interaction_summary
+          - interaction_comments
+          - interaction_context
+          - interaction_explanation
+          - interaction_narrative
+    time_dimensions:
+      - name: DATE
+        expr: DATE
+        data_type: DATE
+        sample_values:
+          - '2025-03-05'
+          - '2025-03-07'
+          - '2025-03-09'
+        description: Date of customer interaction.
+        synonyms:
+          - day
+          - calendar_date
+          - timestamp
+          - date_recorded
+          - entry_date
+          - record_date
+          - calendar_day
+          - date_logged
+    primary_key:
+      columns:
+        - INTERACTION_ID
+    description: This table stores information about interactions between customers and the company, including the type of interaction, the feature or product discussed, the date of the interaction, the current status of the issue or request, and a detailed description of the interaction.
+    synonyms:
+      - customer_interactions
+      - customer_contacts
+      - client_communications
+      - user_engagements
+      - customer_service_logs
+      - interaction_records
+      - customer_history
+      - client_interactions
+      - user_activity_logs
+  - name: CUSTOMER_MEETINGS
+    base_table:
+      database: AICOLLEGE
+      schema: PUBLIC
+      table: CUSTOMER_MEETINGS
+    dimensions:
+      - name: MEETING_ID
+        expr: MEETING_ID
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - M1
+          - M2
+          - M3
+        description: Track customer meetings, topics discussed, and which Snowflake features were covered. Each meeting links to a customer.
+        synonyms:
+          - meeting_key
+          - event_id
+          - conference_id
+          - appointment_number
+          - session_identifier
+          - gathering_code
+          - meeting_log
+          - customer_meetings
+          - event_sessions
+          - feature_discussions
+      - name: CUSTOMER_NAME
+        expr: CUSTOMER_NAME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Acme Corp
+          - BetaTech
+          - Gamma LLC
+        description: The name of the customer that the meeting was held with.
+        synonyms:
+          - client_name
+          - customer_title
+          - account_holder
+          - account_name
+          - company_name
+          - client_title
+          - account_owner
+      - name: TOPIC
+        expr: TOPIC
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Audit‑Season Scaling
+          - Marketing Analytics
+          - Revenue Data Integration
+        description: The topic or subject of discussion for a customer meeting.
+        synonyms:
+          - subject
+          - theme
+          - discussion
+          - agenda
+          - issue
+          - matter
+          - subject_matter
+          - meeting_subject
+      - name: SNOWFLAKE_FEATURE
+        expr: SNOWFLAKE_FEATURE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Warehouse Autoscaling
+          - Snowpark
+          - Document AI
+        description: The features of Snowflake that were discussed during the customer meeting.
+        synonyms:
+          - snowflake_capability
+          - snowflake_functionality
+          - snowflake_attribute
+          - snowflake_characteristic
+          - snowflake_property
+      - name: MEETING_TYPE
+        expr: MEETING_TYPE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Sales
+          - Technical Review
+          - Demo
+        description: The type of meeting held with the customer, such as a sales discussion, technical review, or product demonstration.
+        synonyms:
+          - meeting_category
+          - meeting_format
+          - meeting_style
+          - event_type
+          - gathering_type
+          - conference_type
+          - discussion_type
+          - session_format
+      - name: CUSTOMER_SIZE
+        expr: CUSTOMER_SIZE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Large
+          - Medium
+          - Small
+        description: The size of the customer's organization, categorized as Large, Medium, or Small, indicating the scale of the customer's business operations.
+        synonyms:
+          - company_size
+          - organization_size
+          - customer_scale
+          - business_size
+          - enterprise_size
+          - firm_size
+      - name: REGION
+        expr: REGION
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - North America
+          - Europe
+          - Asia
+        description: Geographic region where the customer meeting took place.
+        synonyms:
+          - area
+          - territory
+          - zone
+          - district
+          - location
+          - province
+          - state
+          - county
+          - geographic_area
+          - locale
+    time_dimensions:
+      - name: MEETING_DATE
+        expr: MEETING_DATE
+        data_type: DATE
+        sample_values:
+          - '2025-03-10'
+          - '2025-03-12'
+          - '2025-03-15'
+        description: Date on which the meeting with the customer took place.
+        synonyms:
+          - appointment_date
+          - meeting_day
+          - event_date
+          - schedule_date
+          - date_of_meeting
+          - meeting_schedule
+          - appointment_schedule
+          - calendar_date
+    facts:
+      - name: MEETING_DURATION
+        expr: MEETING_DURATION
+        data_type: NUMBER(38,0)
+        sample_values:
+          - '30'
+          - '60'
+          - '45'
+        description: The length of time, in minutes, that a customer meeting lasted.
+        synonyms:
+          - meeting_length
+          - meeting_time
+          - duration_of_meeting
+          - length_of_meeting
+          - meeting_hours
+          - meeting_minutes
+          - time_spent_in_meeting
+    primary_key:
+      columns:
+        - MEETING_ID
+    description: This table stores information about meetings held with customers, including details such as the meeting date, topic, and duration, as well as information about the customer and the Snowflake features discussed during the meeting.
+    synonyms:
+      - customer_meetings
+      - client_sessions
+      - customer_sessions
+      - meetings
+      - customer_appointments
+      - client_meetings
+      - appointments
+      - customer_calls
+    filters:
+      - expr: MEETING_DATE >= DATE '2025-02-01' AND MEETING_DATE < DATE '2026-01-31'
+        name: FY26
+        description: Meetings that occurred in Fiscal Year 2026 (Feb 1, 2025 – Jan 31, 2026)
+        synonyms:
+          - fiscal year 2026
+          - FY2026
+          - 2026 fiscal
+    metrics:
+      - expr: COUNT(*)
+        name: total_meetings
+        description: Total number of customer meetings recorded across all accounts
+        synonyms:
+          - meeting count
+          - number of meetings
+          - total customer meetings
+  - name: CUSTOMER_MEETING_OUTCOMES
+    base_table:
+      database: AICOLLEGE
+      schema: PUBLIC
+      table: CUSTOMER_MEETING_OUTCOMES
+    dimensions:
+      - name: MEETING_ID
+        expr: MEETING_ID
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - M1
+          - M2
+          - M3
+        description: tracks the outcome of each meeting (e.g., demo scheduled, deal won, follow-up needed).
+        synonyms:
+          - meeting_reference
+          - meeting_key
+          - customer_meeting_identifier
+          - meeting_unique_id
+          - engagement_id
+          - interaction_id
+          - outcomes
+          - meeting_results
+          - deal_outcomes
+          - follow_up_status
+      - name: OUTCOME
+        expr: OUTCOME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Demo Scheduled
+          - POC Planned
+          - Follow-up Needed
+        description: The outcome or result of a meeting with a customer, indicating the next steps or actions required, such as scheduling a demo, planning a proof of concept, or requiring follow-up communication.
+        synonyms:
+          - result
+          - conclusion
+          - decision
+          - resolution
+          - verdict
+          - finding
+          - upshot
+          - aftermath
+          - effect
+          - consequence
+      - name: CUSTOMER_FEEDBACK
+        expr: CUSTOMER_FEEDBACK
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Positive
+          - Neutral
+        description: The outcome of a customer meeting based on the customer's feedback, categorized as either Positive or Neutral.
+        synonyms:
+          - client_response
+          - customer_comment
+          - customer_review
+          - customer_satisfaction
+          - customer_opinion
+          - client_insight
+          - feedback_from_customer
+      - name: ACTION_REQUIRED
+        expr: ACTION_REQUIRED
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Schedule follow-up call
+          - Provide architecture deck and Snowpark code samples
+          - Send technical demo
+        description: The action or next step required as a result of the customer meeting.
+        synonyms:
+          - next_steps
+          - follow_up_action
+          - required_response
+          - necessary_action
+          - further_action_needed
+          - action_to_be_taken
+          - follow_up_required
+          - required_follow_up
+    time_dimensions:
+      - name: FOLLOW_UP_DATE
+        expr: FOLLOW_UP_DATE
+        data_type: DATE
+        sample_values:
+          - '2025-03-25'
+          - '2025-03-22'
+          - '2025-04-01'
+        description: The date on which a follow-up action is scheduled to occur after a customer meeting.
+        synonyms:
+          - next_step_date
+          - followup_schedule
+          - follow_up_schedule
+          - next_action_date
+          - follow_up_timeline
+          - subsequent_meeting_date
+          - next_meeting_date
+    facts:
+      - name: DEAL_VALUE
+        expr: DEAL_VALUE
+        data_type: NUMBER(15,2)
+        sample_values:
+          - '50000.00'
+          - '0.00'
+          - '75000.00'
+        description: The monetary value of a deal resulting from a customer meeting, representing the potential revenue or sale amount.
+        synonyms:
+          - deal_amount
+          - sale_value
+          - transaction_value
+          - contract_value
+          - agreement_price
+          - purchase_price
+          - revenue_generated
+    primary_key:
+      columns:
+        - MEETING_ID
+    description: This table stores the outcomes of customer meetings, including the meeting ID, outcome, follow-up date, deal value, customer feedback, and action required. It serves as a repository for tracking the results of customer interactions, enabling businesses to monitor progress, identify areas for improvement, and inform future sales strategies.
+    synonyms:
+      - customer_meeting_results
+      - meeting_outcomes
+      - customer_meeting_feedback
+      - meeting_follow_ups
+      - sales_meeting_outcomes
+      - customer_interaction_results
+  - name: CUSTOMER_INSIGHTS
+    base_table:
+      database: AICOLLEGE
+      schema: PUBLIC
+      table: CUSTOMER_INSIGHTS
+    dimensions:
+      - name: MEETING_ID
+        expr: MEETING_ID
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - M1
+          - M2
+          - M3
+        description: Provides a comprehensive overview of customer interactions, combining core meeting details with customer interaction analysis.
+        synonyms:
+          - meeting_reference
+          - interaction_id
+          - event_id
+          - session_id
+          - conference_id
+          - appointment_id
+          - gathering_id
+          - customer_summary_view
+          - customer_360
+          - engagement_overview
+          - insights_dashboard
+      - name: CUSTOMER_NAME
+        expr: CUSTOMER_NAME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Acme Corp
+          - BetaTech
+          - Gamma LLC
+        description: The name of the customer or organization that the insight is related to.
+        synonyms:
+          - customer
+          - client
+          - account_name
+          - account_holder
+          - company_name
+          - organization_name
+          - client_name
+          - account_owner
+      - name: TOPIC
+        expr: TOPIC
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Audit‑Season Scaling
+          - Marketing Analytics
+          - Revenue Data Integration
+        description: The topic or subject area of customer insight, representing the main theme or category of the insight, such as a business process, data integration, or analytics focus area.
+        synonyms:
+          - subject
+          - theme
+          - discussion
+          - issue
+          - matter
+          - agenda_item
+          - conversation_topic
+          - meeting_subject
+      - name: SNOWFLAKE_FEATURE
+        expr: SNOWFLAKE_FEATURE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Warehouse Autoscaling
+          - Snowpark
+          - Document AI
+        description: This column captures the specific Snowflake features utilized by customers, providing insight into the types of functionalities and tools they are leveraging within the Snowflake platform.
+        synonyms:
+          - product_discussed
+          - feature_highlighted
+          - discussed_capability
+          - snowflake_functionality
+          - highlighted_snowflake_aspect
+      - name: MEETING_TYPE
+        expr: MEETING_TYPE
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Sales
+          - Technical Review
+          - Demo
+        description: The type of meeting held with the customer, such as a sales discussion, technical review, or product demonstration.
+        synonyms:
+          - meeting_category
+          - interaction_type
+          - event_type
+          - engagement_type
+          - discussion_type
+          - conference_type
+          - gathering_type
+          - session_type
+      - name: OUTCOME
+        expr: OUTCOME
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Demo Scheduled
+          - POC Planned
+          - Follow-up Needed
+        description: The outcome of the sales or business development interaction with the customer, indicating the next step or status of the engagement.
+        synonyms:
+          - result
+          - resolution
+          - conclusion
+          - decision
+          - verdict
+          - upshot
+          - aftermath
+          - effect
+          - consequence
+          - end_result
+      - name: CUSTOMER_FEEDBACK
+        expr: CUSTOMER_FEEDBACK
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Positive
+          - Neutral
+        description: The type of feedback received from a customer, categorized as either positive or neutral, indicating their sentiment towards a product, service, or experience.
+        synonyms:
+          - customer_comments
+          - client_response
+          - customer_review
+          - feedback_from_customer
+          - customer_opinion
+          - client_insight
+          - customer_reaction
+      - name: INDUSTRY
+        expr: INDUSTRY
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - Professional Services
+          - IT Services
+          - Sports Technology
+        description: The industry or sector in which the customer operates, providing context for their business needs and challenges.
+        synonyms:
+          - sector
+          - field
+          - market
+          - category
+          - business_type
+          - trade
+          - commerce
+          - economic_sector
+      - name: REGION
+        expr: REGION
+        data_type: VARCHAR(16777216)
+        sample_values:
+          - North America
+          - Europe
+          - Asia
+        description: Geographic region where the customer is located.
+        synonyms:
+          - area
+          - territory
+          - zone
+          - district
+          - location
+          - geographic_area
+          - province
+          - state
+          - country
+          - geographic_region
+    time_dimensions:
+      - name: MEETING_DATE
+        expr: MEETING_DATE
+        data_type: DATE
+        sample_values:
+          - '2025-03-10'
+          - '2025-03-12'
+          - '2025-03-15'
+        description: Date on which a meeting with the customer took place.
+        synonyms:
+          - appointment_date
+          - meeting_schedule
+          - event_date
+          - schedule_date
+          - calendar_date
+          - date_of_meeting
+          - meeting_timestamp
+    facts:
+      - name: DEAL_VALUE
+        expr: DEAL_VALUE
+        data_type: NUMBER(15,2)
+        sample_values:
+          - '50000.00'
+          - '0.00'
+          - '75000.00'
+        description: The total monetary value of a deal or transaction made by a customer.
+        synonyms:
+          - contract_value
+          - sale_amount
+          - transaction_value
+          - deal_size
+          - agreement_value
+          - purchase_price
+          - revenue_generated
+    description: This view provides a comprehensive overview of customer interactions, combining core meeting details with customer interaction analysis. It offers insights into customer meetings, including meeting dates, topics, Snowflake features discussed, meeting types, outcomes, deal values, and customer feedback. Additionally, it incorporates customer interaction data, such as interaction details, resolution status, and industry and region information, to provide a holistic understanding of customer engagement and behavior.
+    synonyms:
+      - customer_insights
+      - customer_meeting_data
+      - customer_interaction_analysis
+      - customer_outcome_analysis
+      - customer_meeting_outcomes
+      - customer_insight_report
+relationships:
+  - name: meetings_to_outcomes
+    join_type: left_outer
+    relationship_type: one_to_one
+    left_table: CUSTOMER_MEETINGS
+    relationship_columns:
+      - left_column: MEETING_ID
+        right_column: MEETING_ID
+    right_table: CUSTOMER_MEETING_OUTCOMES
+  - name: meetings_to_industry
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: CUSTOMER_MEETINGS
+    relationship_columns:
+      - left_column: CUSTOMER_NAME
+        right_column: CUSTOMER_NAME
+    right_table: CUSTOMER_INDUSTRY
+  - name: interactions_to_industry
+    join_type: inner
+    relationship_type: many_to_one
+    left_table: CUSTOMER_INTERACTIONS
+    relationship_columns:
+      - left_column: CUSTOMER_NAME
+        right_column: CUSTOMER_NAME
+    right_table: CUSTOMER_INDUSTRY
+verified_queries:
+  - name: ListCustomers
+    question: What are all the unique customer names?
+    use_as_onboarding_question: false
+    sql: SELECT DISTINCT customer_name FROM customer_industry ORDER BY customer_name LIMIT 1000
+    verified_by: HOL Creator
+    verified_at: 1750429141
+  - name: InteractionCountByIndustry
+    question: How many customer interactions occurred by industry?
+    use_as_onboarding_question: false
+    sql: SELECT ci2.industry, COUNT(*) AS interaction_count FROM customer_interactions AS ci INNER JOIN customer_industry AS ci2 ON ci.customer_name = ci2.customer_name GROUP BY ci2.industry ORDER BY interaction_count DESC NULLS LAST LIMIT 1000
+    verified_by: HOL Creator
+    verified_at: 1750429186
+  - name: EngagementByIndustry
+    question: What was our customer engagement—unique customers, total meetings, positive feedback count, and total deal value—by industry?
+    use_as_onboarding_question: false
+    sql: WITH meeting_metrics AS (SELECT ci.industry, COUNT(DISTINCT cm.customer_name) AS unique_customers, COUNT(*) AS total_meetings, COUNT(CASE WHEN cmo.customer_feedback = 'Positive' THEN 1 END) AS positive_feedback_count, ROUND(SUM(COALESCE(cmo.deal_value, 0)), 2) AS total_deal_value FROM customer_meetings AS cm INNER JOIN customer_industry AS ci ON cm.customer_name = ci.customer_name LEFT OUTER JOIN customer_meeting_outcomes AS cmo ON cm.meeting_id = cmo.meeting_id GROUP BY ci.industry) SELECT industry, unique_customers, total_meetings, positive_feedback_count, total_deal_value FROM meeting_metrics ORDER BY total_meetings DESC NULLS LAST LIMIT 1000
+    verified_by: HOL Creator
+    verified_at: 1750429219
+  - name: FeatureAdoptionBySize
+    question: How many meetings discussed each Snowflake feature by customer size?
+    use_as_onboarding_question: false
+    sql: SELECT cm.customer_size, cm.snowflake_feature, COUNT(*) AS meeting_count FROM customer_meetings AS cm GROUP BY cm.customer_size, cm.snowflake_feature ORDER BY cm.customer_size, meeting_count DESC NULLS LAST LIMIT 1000
+    verified_by: HOL Creator
+    verified_at: 1750429250
+  - name: RegionalPerformance
+    question: What was the regional performance—unique customers, average meeting duration, and total deal value?
+    use_as_onboarding_question: false
+    sql: SELECT cm.region, COUNT(DISTINCT cm.customer_name) AS unique_customers, ROUND(AVG(cm.meeting_duration), 2) AS avg_meeting_duration, ROUND(SUM(COALESCE(cmo.deal_value, 0)), 2) AS total_deal_value FROM customer_meetings AS cm LEFT OUTER JOIN customer_meeting_outcomes AS cmo ON cm.meeting_id = cmo.meeting_id GROUP BY cm.region ORDER BY unique_customers DESC NULLS LAST LIMIT 1000
+    verified_by: HOL Creator
+    verified_at: 1750429295
+  - name: CustomerJourneySummary
+    question: For each customer, how many meetings did they have, which meeting types and features were covered, and what was their largest deal value?
+    use_as_onboarding_question: false
+    sql: WITH customer_metrics AS (SELECT cm.customer_name, COUNT(*) AS total_meetings, LISTAGG(DISTINCT cm.meeting_type, ', ') WITHIN GROUP (ORDER BY cm.meeting_type) AS meeting_types, LISTAGG(DISTINCT cm.snowflake_feature, ', ') WITHIN GROUP (ORDER BY cm.snowflake_feature) AS features_covered, ROUND(MAX(COALESCE(cmo.deal_value, 0)), 2) AS max_deal_value FROM customer_meetings AS cm LEFT OUTER JOIN customer_meeting_outcomes AS cmo ON cm.meeting_id = cmo.meeting_id GROUP BY cm.customer_name) SELECT customer_name, total_meetings, meeting_types, features_covered, max_deal_value FROM customer_metrics ORDER BY total_meetings DESC NULLS LAST LIMIT 1000
+    verified_by: HOL Creator
+    verified_at: 1750429349
+  - name: MeetingOutcomeStats
+    question: What were the counts, average meeting durations, total deal values, and industries represented for each meeting outcome?
+    use_as_onboarding_question: false
+    sql: WITH outcome_metrics AS (SELECT COALESCE(cmo.outcome, 'No Outcome') AS outcome, COUNT(*) AS meeting_count, ROUND(AVG(cm.meeting_duration), 2) AS avg_meeting_duration, ROUND(SUM(COALESCE(cmo.deal_value, 0)), 2) AS total_deal_value, COUNT(DISTINCT ci.industry) AS unique_industries FROM customer_meetings AS cm LEFT OUTER JOIN customer_meeting_outcomes AS cmo ON cm.meeting_id = cmo.meeting_id INNER JOIN customer_industry AS ci ON cm.customer_name = ci.customer_name GROUP BY COALESCE(cmo.outcome, 'No Outcome')) SELECT outcome, meeting_count, avg_meeting_duration, total_deal_value, unique_industries FROM outcome_metrics ORDER BY meeting_count DESC NULLS LAST LIMIT 1000
+    verified_by: HOL Creator
+    verified_at: 1750429388
+custom_instructions: |-
+  "- When combining CUSTOMER_MEETINGS and CUSTOMER_MEETING_OUTCOMES, always use a LEFT JOIN to preserve meetings even if no outcome exists.
+  - Round all DEAL_VALUE and other monetary fields to two decimal places in the final SELECT clause.
+  - When grouping or filtering by quarter, use the FISCAL_QUARTER column rather than calendar quarter.
+  - If the user’s question does not include a LIMIT, append LIMIT 1000 to prevent accidentally returning massive result sets.
+  - If the user asks about Gen AI capabilities, add to your WHERE clause: SNOWFLAKE_FEATURE IN ('Document AI','Snowpark','Cortex AI NLQ')."
