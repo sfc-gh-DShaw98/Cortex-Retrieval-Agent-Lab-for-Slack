@@ -13,7 +13,7 @@ By the end of this hands-on lab, you'll build a Cortex Agent that:
 - Retrieves the right insights using Cortex Search and Cortex Analyst
 - Delivers clear, auditable answers from Snowflake
 
-[Insert architecture diagram here]
+[[HOL Workflow]](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/image/OverallFlow.jpg)
 
 ## Lab Workflow
 This lab walks through a 3-phase agent orchestration flow:
