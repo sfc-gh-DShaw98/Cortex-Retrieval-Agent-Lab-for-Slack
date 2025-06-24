@@ -181,4 +181,4 @@ Terminal should log:
 ```bash
 /askcortex SEAI55
 ```
-A green ✅ confirms your semantic model contains 6 unique customers and the bot is live. You may now proceed to Phase 2 – Unstructured Retrieval.
+A green ✅ confirms your semantic model contains 6 unique customers and the bot is live. You may now proceed to [Phase 2 – Cortex Search & Transcript Insights](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/lab_instructions/phase2.md).
