@@ -45,7 +45,7 @@ This lab walks through a 3-phase agent orchestration flow:
 | `notebooks/` | Phase 1 & 2 setup notebooks |
 | `data/` | Mock CRM SQL DDL + six PDF transcripts |
 | `semantic-model/` | [data_agent_semantic_model.yaml](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/semantic-model/data_agent_semantic_model.yaml) (P1) • data_agent_semantic_model2.yaml (P2) |
-| `scripts/` | [slackapp.py](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/scripts/slackapp.py) Lightweight bot for Phases 1-2  • [agent.py]() Final Cortex Agent (Phase 3) |
+| `scripts/` | [slackapp.py](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/scripts/slackapp.py) Lightweight bot for Phases 1-2  • [slackapp_agent.py](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/scripts/slackapp_agent.py) Final Cortex Agent (Phase 3) |
 | `config/` | [check_deps.py](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/config/check_deps.py) to verify Python packages • [app_manifest.json](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/config/app_manifest.json) Slack-app manifest • [dataagent.env.sample](https://github.com/sfc-gh-DShaw98/Cortex-Retrieval-Agent-Lab-for-Slack/blob/main/config/dataagent.env.sample) template for Snowflake / Slack creds |
 
 > ℹ️ This repo ships mock data & code only. Internal Snowflake grading (DORA-xx) and Seismic links remain on the private enablement portal.
